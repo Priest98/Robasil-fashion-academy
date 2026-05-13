@@ -47,10 +47,13 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLightTheme, setIsLightTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'light';
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') return true;
+      if (saved === 'dark') return false;
     }
-    return false;
+    return false; // Default to dark
   });
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
