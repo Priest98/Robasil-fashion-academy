@@ -142,16 +142,16 @@ export default function App() {
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 4, ease: LUXURY_EASE, delay: isLoading ? 0 : 4.5 }}
-          className={`absolute inset-0 z-0 transition-colors duration-1000 ${isLightTheme ? 'bg-paper' : 'bg-black'}`}
+          className={`absolute inset-0 z-0 transition-colors duration-1000 ${isLightTheme ? 'bg-[#EAE8E0]' : 'bg-black'}`}
         >
           <img 
             src={heroImage} 
             alt="Robasil Fashion Academy Atmosphere" 
-            className={`w-full h-full object-cover contrast-125 transition-opacity duration-1000 ${isLightTheme ? 'opacity-20' : 'opacity-50'}`}
+            className={`w-full h-full object-cover contrast-125 transition-all duration-1000 ${isLightTheme ? 'opacity-30 brightness-75' : 'opacity-50'}`}
             referrerPolicy="no-referrer"
             loading="lazy"
           />
-          <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-1000 ${isLightTheme ? 'from-paper/0 via-paper/20 to-paper' : 'from-charcoal/0 via-charcoal/40 to-charcoal'}`} />
+          <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-1000 ${isLightTheme ? 'from-transparent via-[#EAE8E0]/40 to-[#EAE8E0]' : 'from-charcoal/0 via-charcoal/40 to-charcoal'}`} />
         </motion.div>
 
         <div className="relative z-10 text-center px-6 max-w-6xl">
