@@ -202,40 +202,78 @@ export default function App() {
       </section>
 
       {/* Philosophy - Atmosphere First */}
-      <section id="the-academy" className={`relative min-h-[70vh] flex flex-col items-center justify-center px-6 md:px-24 py-24 md:py-48 transition-colors duration-700 ${isLightTheme ? 'bg-paper' : 'bg-charcoal'}`}>
-        <div className="max-w-7xl mx-auto text-center space-y-8 md:space-y-12">
+      <section id="the-academy" className={`relative py-24 md:py-48 px-6 md:px-24 transition-colors duration-700 ${isLightTheme ? 'bg-paper' : 'bg-charcoal'}`}>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 1.5, ease: LUXURY_EASE }}
-            className="flex flex-col items-center"
+            className={`relative aspect-[4/5] p-3 rounded-[3rem] shadow-3xl group border transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/5 border-charcoal/5' : 'bg-black/40 border-sand/5'}`}
           >
-            <h3 className="font-serif text-4xl md:text-7xl tracking-tighter leading-tight mb-6 md:mb-8">
-              Where intent <br /> meets the <span className="italic">needle.</span>
-            </h3>
-            <p className={`font-light text-lg md:text-xl leading-relaxed max-w-lg editorial-body transition-colors duration-700 ${isLightTheme ? 'text-charcoal/70' : 'text-sand/60'}`}>
-              Robasil Fashion Academy is not a school. It is an industry-leading transformational space in Victoria Island, Lagos. We cultivate the elite designers of tomorrow through rigorous craftsmanship and avant-garde thinking.
-            </p>
+            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden">
+              <video 
+                ref={videoRef}
+                src={academyVideo} 
+                loop 
+                playsInline
+                className="w-full h-full object-cover opacity-90 scale-105 group-hover:scale-100 transition-transform duration-[4s] ease-out cursor-pointer"
+                onClick={togglePlay}
+              />
+              {!isPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors duration-500">
+                  <div className="relative w-24 h-24 flex items-center justify-center cursor-pointer" onClick={togglePlay}>
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform hover:scale-110 transition-transform duration-500">
+                      <path d="M15 15 C15 5, 30 0, 45 10 L70 30 C78 35, 78 45, 70 50 L45 70 C30 80, 15 75, 15 65 Z" fill={isLightTheme ? "#FFFFFF" : "#000000"} />
+                      <circle cx="60" cy="40" r="12" fill={isLightTheme ? "#000000" : "#FFFFFF"} />
+                    </svg>
+                  </div>
+                </div>
+              )}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
+                <h4 className="font-serif text-2xl mb-2">Robasil Fashion Academy Experience</h4>
+                <div className="flex items-center gap-4 text-xs opacity-80">
+                  <span className="flex items-center gap-1"><Clock size={12} /> 2 mins</span>
+                  <span className="flex items-center gap-1"><Award size={12} /> 5.0/5</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 1.5, ease: LUXURY_EASE }}
-            className={`flex flex-col sm:flex-row items-center gap-8 md:gap-12 pt-8 border-t transition-colors duration-700 text-center sm:text-left ${isLightTheme ? 'border-charcoal/10' : 'border-sand/10'}`}
-          >
-            <div className="space-y-1">
-              <p className="font-serif text-lg italic">Founded 2024</p>
-              <p className="luxury-button opacity-40 text-[8px]">A Perspective Shift</p>
-            </div>
-            <div className={`hidden sm:block h-12 w-[1px] transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/10' : 'bg-sand/10'}`} />
-            <div className="space-y-1">
-              <p className="font-serif text-lg italic">Industry-First</p>
-              <p className="luxury-button opacity-40 text-[8px]">Curriculum Excellence</p>
-            </div>
-          </motion.div>
+          <div className="space-y-8 md:space-y-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 1.5, ease: LUXURY_EASE }}
+            >
+              <h2 className={`luxury-button opacity-40 mb-4 transition-colors duration-700 ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}>Our Discipline</h2>
+              <h3 className="font-serif text-4xl md:text-7xl tracking-tighter leading-tight mb-6 md:mb-8">
+                Where intent <br /> meets the <span className="italic">needle.</span>
+              </h3>
+              <p className={`font-light text-lg md:text-xl leading-relaxed max-w-lg editorial-body transition-colors duration-700 ${isLightTheme ? 'text-charcoal/70' : 'text-sand/60'}`}>
+                Robasil Fashion Academy is not a school. It is an industry-leading transformational space in Victoria Island, Lagos. We cultivate the elite designers of tomorrow through rigorous craftsmanship and avant-garde thinking.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 1.5, ease: LUXURY_EASE }}
+              className={`flex flex-col sm:flex-row items-center gap-8 md:gap-12 pt-8 border-t transition-colors duration-700 text-center sm:text-left ${isLightTheme ? 'border-charcoal/10' : 'border-sand/10'}`}
+            >
+              <div className="space-y-1">
+                <p className="font-serif text-lg italic">Founded 2024</p>
+                <p className="luxury-button opacity-40 text-[8px]">A Perspective Shift</p>
+              </div>
+              <div className={`hidden sm:block h-12 w-[1px] transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/10' : 'bg-sand/10'}`} />
+              <div className="space-y-1">
+                <p className="font-serif text-lg italic">Industry-First</p>
+                <p className="luxury-button opacity-40 text-[8px]">Curriculum Excellence</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
