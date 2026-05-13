@@ -37,7 +37,7 @@ export default function Loader({ onComplete, isLightTheme }: { onComplete: () =>
           initial={{ y: '100%' }}
           animate={{ y: 0 }}
           transition={{ duration: 1.5, ease: LUXURY_EASE, delay: 0.5 }}
-          className={`font-serif text-3xl md:text-8xl tracking-tighter italic text-center transition-colors duration-700 ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}
+          className="font-serif text-3xl md:text-8xl tracking-tighter italic text-center"
         >
           Robasil <br className="md:hidden" /> Fashion Academy
         </motion.h2>
@@ -46,27 +46,27 @@ export default function Loader({ onComplete, isLightTheme }: { onComplete: () =>
       <div className="relative overflow-hidden h-4 flex items-center">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 0.8, y: 0 }}
+          animate={{ opacity: 0.4, y: 0 }}
           transition={{ duration: 1.2, delay: 1.5, ease: LUXURY_EASE }}
-          className={`luxury-button flex items-center gap-4 ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}
+          className="luxury-button flex items-center gap-4"
         >
           <span>Redefining</span>
-          <span className={`w-8 h-[1px] transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/40' : 'bg-sand/30'}`} />
+          <span className={`w-8 h-[1px] transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/30' : 'bg-sand/30'}`} />
           <span>Perspective</span>
         </motion.p>
       </div>
 
       <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
         <div className="space-y-1">
-          <p className={`luxury-button transition-colors duration-700 ${isLightTheme ? 'text-charcoal opacity-40' : 'text-sand opacity-20'}`} style={{ fontSize: '7px' }}>Initialization</p>
-          <div className={`w-32 h-[1px] relative transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/20' : 'bg-sand/10'}`}>
+          <p className="luxury-button opacity-20" style={{ fontSize: '7px' }}>Initialization</p>
+          <div className={`w-32 h-[1px] relative transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/10' : 'bg-sand/10'}`}>
             <motion.div 
               style={{ width: `${progress}%` }}
-              className={`absolute top-0 left-0 h-full transition-colors duration-700 ${isLightTheme ? 'bg-charcoal' : 'bg-sand/40'}`}
+              className={`absolute top-0 left-0 h-full transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/40' : 'bg-sand/40'}`}
             />
           </div>
         </div>
-        <span className={`luxury-button tabular-nums transition-colors duration-700 ${isLightTheme ? 'text-charcoal opacity-60' : 'text-sand opacity-20'}`}>
+        <span className="luxury-button tabular-nums opacity-20">
           {progress.toString().padStart(3, '0')}%
         </span>
       </div>
