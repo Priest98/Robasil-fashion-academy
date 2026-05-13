@@ -2,10 +2,18 @@ import { motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
+import { Sun, Moon } from 'lucide-react';
+
 const LUXURY_EASE = [0.22, 1, 0.36, 1];
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavbarProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  isLightTheme: boolean;
+  toggleTheme: () => void;
+}
+
+export default function Navbar({ isOpen, setIsOpen, isLightTheme, toggleTheme }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -24,24 +32,33 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 p-6 md:p-8 flex justify-between items-center transition-all duration-1000 ${scrolled ? 'bg-charcoal/20 backdrop-blur-md' : 'bg-transparent'}`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 p-6 md:p-8 flex justify-between items-center transition-all duration-1000 ${scrolled ? (isLightTheme ? 'bg-paper/40 backdrop-blur-md' : 'bg-charcoal/20 backdrop-blur-md') : 'bg-transparent'}`}>
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.5, ease: LUXURY_EASE }}
           className="pointer-events-auto"
         >
-          <a href="#" className="font-serif text-lg tracking-tighter hover:italic transition-all">Robasil Fashion Academy</a>
-          <span className="ml-4 font-mono text-[8px] tracking-[0.3em] uppercase opacity-40 hidden md:inline">
+          <a href="#" className={`font-serif text-lg tracking-tighter hover:italic transition-all ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}>Robasil Fashion Academy</a>
+          <span className={`ml-4 font-mono text-[8px] tracking-[0.3em] uppercase opacity-40 hidden md:inline ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}>
             // Fshn.Acdmy.Lagos
           </span>
         </motion.div>
 
-        <div className="flex items-center gap-8 pointer-events-auto relative z-[70]">
+        <div className="flex items-center gap-6 md:gap-8 pointer-events-auto relative z-[70]">
+          <motion.button
+            onClick={toggleTheme}
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isLightTheme ? 'bg-charcoal/5 text-charcoal' : 'bg-white/10 text-sand'}`}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isLightTheme ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
+          </motion.button>
+
           <motion.button 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }}
-            className="hidden md:block luxury-button opacity-60 hover:opacity-100 transition-opacity active:scale-95"
+            className={`hidden md:block luxury-button opacity-60 hover:opacity-100 transition-opacity active:scale-95 ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}
           >
             Inquire via WhatsApp
           </motion.button>
@@ -54,8 +71,8 @@ export default function Navbar() {
             className="group flex flex-col items-end gap-1.5 p-2 -mr-2"
             aria-label="Toggle Menu"
           >
-            <div className={`h-[1px] bg-sand transition-all duration-700 ease-[0.22,1,0.36,1] ${isOpen ? 'w-8 rotate-45 translate-y-[2px] bg-sand' : 'w-8 group-hover:w-12 bg-sand'}`} />
-            <div className={`h-[1px] bg-sand transition-all duration-700 ease-[0.22,1,0.36,1] ${isOpen ? 'w-8 -rotate-45 -translate-y-[2px] bg-sand' : 'w-4 group-hover:w-8 bg-sand'}`} />
+            <div className={`h-[1px] transition-all duration-700 ease-[0.22,1,0.36,1] ${isOpen ? 'w-8 rotate-45 translate-y-[2px]' : 'w-8 group-hover:w-12'} ${isLightTheme ? 'bg-charcoal' : 'bg-sand'}`} />
+            <div className={`h-[1px] transition-all duration-700 ease-[0.22,1,0.36,1] ${isOpen ? 'w-8 -rotate-45 -translate-y-[2px]' : 'w-4 group-hover:w-8'} ${isLightTheme ? 'bg-charcoal' : 'bg-sand'}`} />
           </motion.button>
         </div>
       </nav>
@@ -67,7 +84,7 @@ export default function Navbar() {
           pointerEvents: isOpen ? 'auto' : 'none'
         }}
         transition={{ duration: 1.2, ease: LUXURY_EASE }}
-        className="fixed inset-0 z-[60] bg-charcoal flex flex-col p-8 md:p-24 overflow-y-auto"
+        className={`fixed inset-0 z-[60] flex flex-col p-8 md:p-24 overflow-y-auto transition-colors duration-1000 ${isLightTheme ? 'bg-paper text-charcoal' : 'bg-charcoal text-sand'}`}
       >
         <div className="noise absolute inset-0 opacity-10 pointer-events-none" />
         

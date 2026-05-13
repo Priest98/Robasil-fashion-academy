@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const LUXURY_EASE = [0.22, 1, 0.36, 1];
 
-export default function Loader({ onComplete }: { onComplete: () => void }) {
+export default function Loader({ onComplete, isLightTheme }: { onComplete: () => void, isLightTheme: boolean }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     <motion.div
       exit={{ y: '-100%' }}
       transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-      className="fixed inset-0 z-[1000] bg-charcoal flex flex-col items-center justify-center p-8 overflow-hidden"
+      className={`fixed inset-0 z-[1000] flex flex-col items-center justify-center p-8 overflow-hidden transition-colors duration-700 ${isLightTheme ? 'bg-paper text-charcoal' : 'bg-charcoal text-sand'}`}
     >
       <div className="noise absolute inset-0 opacity-10" />
       
@@ -51,7 +51,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           className="luxury-button flex items-center gap-4"
         >
           <span>Redefining</span>
-          <span className="w-8 h-[1px] bg-sand/30" />
+          <span className={`w-8 h-[1px] transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/30' : 'bg-sand/30'}`} />
           <span>Perspective</span>
         </motion.p>
       </div>
@@ -59,10 +59,10 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
       <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
         <div className="space-y-1">
           <p className="luxury-button opacity-20" style={{ fontSize: '7px' }}>Initialization</p>
-          <div className="w-32 h-[1px] bg-sand/10 relative">
+          <div className={`w-32 h-[1px] relative transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/10' : 'bg-sand/10'}`}>
             <motion.div 
               style={{ width: `${progress}%` }}
-              className="absolute top-0 left-0 h-full bg-sand/40"
+              className={`absolute top-0 left-0 h-full transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/40' : 'bg-sand/40'}`}
             />
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 2, ease: LUXURY_EASE }}
-        className="absolute top-1/2 left-0 w-full h-[1px] bg-sand/5 -translate-y-1/2"
+        className={`absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/5' : 'bg-sand/5'}`}
       />
     </motion.div>
   );

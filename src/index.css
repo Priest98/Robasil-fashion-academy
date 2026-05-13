@@ -9,16 +9,32 @@
   --color-charcoal: #0a0a0a;
   --color-sand: #d4d4d4;
   --color-clay: #262626;
+  --color-paper: #fbfbf9;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --text: #d4d4d4;
+  --border: rgba(212, 212, 212, 0.1);
+}
+
+:root.light {
+  --bg: #fbfbf9;
+  --text: #0a0a0a;
+  --border: rgba(10, 10, 10, 0.1);
 }
 
 @layer base {
   body {
-    @apply bg-charcoal text-sand selection:bg-sand selection:text-charcoal overflow-x-hidden antialiased;
+    background-color: var(--bg);
+    color: var(--text);
+    @apply selection:bg-sand selection:text-charcoal overflow-x-hidden antialiased;
     cursor: none;
     font-size: 14px;
     letter-spacing: 0.04em;
     line-height: 1.7;
     font-family: var(--font-sans);
+    transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1), color 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
