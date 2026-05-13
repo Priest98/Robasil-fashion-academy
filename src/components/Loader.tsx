@@ -1,0 +1,83 @@
+import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+
+const LUXURY_EASE = [0.22, 1, 0.36, 1];
+
+export default function Loader({ onComplete }: { onComplete: () => void }) {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onComplete();
+    }, 4500);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) return 100;
+        return prev + 1;
+      });
+    }, 35);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
+  }, [onComplete]);
+
+  return (
+    <motion.div
+      exit={{ y: '-100%' }}
+      transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+      className="fixed inset-0 z-[1000] bg-charcoal flex flex-col items-center justify-center p-8 overflow-hidden"
+    >
+      <div className="noise absolute inset-0 opacity-10" />
+      
+      <div className="relative overflow-hidden mb-4">
+        <motion.h2
+          initial={{ y: '100%' }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.5, ease: LUXURY_EASE, delay: 0.5 }}
+          className="font-serif text-3xl md:text-8xl tracking-tighter italic text-center"
+        >
+          Robasil <br className="md:hidden" /> Fashion Academy
+        </motion.h2>
+      </div>
+
+      <div className="relative overflow-hidden h-4 flex items-center">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 0.4, y: 0 }}
+          transition={{ duration: 1.2, delay: 1.5, ease: LUXURY_EASE }}
+          className="luxury-button flex items-center gap-4"
+        >
+          <span>Redefining</span>
+          <span className="w-8 h-[1px] bg-sand/30" />
+          <span>Perspective</span>
+        </motion.p>
+      </div>
+
+      <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
+        <div className="space-y-1">
+          <p className="luxury-button opacity-20" style={{ fontSize: '7px' }}>Initialization</p>
+          <div className="w-32 h-[1px] bg-sand/10 relative">
+            <motion.div 
+              style={{ width: `${progress}%` }}
+              className="absolute top-0 left-0 h-full bg-sand/40"
+            />
+          </div>
+        </div>
+        <span className="luxury-button tabular-nums opacity-20">
+          {progress.toString().padStart(3, '0')}%
+        </span>
+      </div>
+
+      {/* Decorative cinematic lines */}
+      <motion.div 
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 2, ease: LUXURY_EASE }}
+        className="absolute top-1/2 left-0 w-full h-[1px] bg-sand/5 -translate-y-1/2"
+      />
+    </motion.div>
+  );
+}
