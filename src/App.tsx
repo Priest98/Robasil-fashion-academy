@@ -147,11 +147,11 @@ export default function App() {
           <img 
             src={heroImage} 
             alt="Robasil Fashion Academy Atmosphere" 
-            className={`w-full h-full object-cover contrast-125 transition-all duration-1000 ${isLightTheme ? 'opacity-20 brightness-[0.6]' : 'opacity-50'}`}
+            className={`w-full h-full object-cover contrast-125 transition-all duration-1000 ${isLightTheme ? 'opacity-[0.08] brightness-[0.5]' : 'opacity-50'}`}
             referrerPolicy="no-referrer"
             loading="lazy"
           />
-          <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-1000 ${isLightTheme ? 'from-transparent via-[#DCD9D0]/60 to-[#DCD9D0]' : 'from-charcoal/0 via-charcoal/40 to-charcoal'}`} />
+          <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-1000 ${isLightTheme ? 'from-transparent via-[#DCD9D0]/80 to-[#DCD9D0]' : 'from-charcoal/0 via-charcoal/40 to-charcoal'}`} />
         </motion.div>
 
         <div className="relative z-10 text-center px-6 max-w-6xl">
