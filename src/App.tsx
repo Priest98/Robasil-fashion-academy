@@ -204,41 +204,59 @@ export default function App() {
         </motion.div>
       </section>
 
-      {/* Philosophy - Atmosphere First */}
-      <section id="the-academy" className={`relative min-h-[70vh] flex flex-col items-center justify-center px-6 md:px-24 py-24 md:py-48 transition-colors duration-700 ${isLightTheme ? 'bg-paper' : 'bg-charcoal'}`}>
-        <div className="max-w-7xl mx-auto text-center space-y-8 md:space-y-12">
+      {/* The Transformation Video - Pure Atmosphere */}
+      <section className={`relative h-[80vh] md:h-screen w-full flex items-center justify-center overflow-hidden transition-colors duration-700 ${isLightTheme ? 'bg-[#F2F0E9]' : 'bg-charcoal'}`}>
+        <div className="absolute inset-0 z-0 scale-105">
+          <video
+            ref={videoRef}
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fashion-academy-video-2mUeJ6u1X9Xy4Xy4Xy4Xy4.mp4"
+            className={`w-full h-full object-cover transition-opacity duration-1000 ${isLightTheme ? 'opacity-40 grayscale-[0.5]' : 'opacity-60'}`}
+            loop
+            muted
+            playsInline
+            onCanPlay={() => {
+              if (videoRef.current) {
+                videoRef.current.play().catch(() => {});
+                setIsPlaying(true);
+              }
+            }}
+          />
+          <div className={`absolute inset-0 bg-gradient-to-b transition-colors duration-700 ${isLightTheme ? 'from-transparent via-paper/20 to-[#F2F0E9]' : 'from-charcoal/40 via-transparent to-charcoal'}`} />
+        </div>
+
+        <div className="relative z-10 text-center px-6 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: LUXURY_EASE }}
-            className="flex flex-col items-center"
           >
-            <h3 className="font-serif text-4xl md:text-7xl tracking-tighter leading-tight mb-6 md:mb-8">
-              Where intent <br /> meets the <span className="italic">needle.</span>
+            <h3 className={`font-serif text-3xl md:text-7xl tracking-tighter italic mb-8 transition-colors duration-700 ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}>
+              From Seeker <br /> to Sculptor.
             </h3>
-            <p className={`font-light text-lg md:text-xl leading-relaxed max-w-lg editorial-body transition-colors duration-700 ${isLightTheme ? 'text-charcoal/70' : 'text-sand/60'}`}>
-              Robasil Fashion Academy is not a school. It is an industry-leading transformational space in Victoria Island, Lagos. We cultivate the elite designers of tomorrow through rigorous craftsmanship and avant-garde thinking.
+            <p className={`font-light text-base md:text-xl leading-relaxed max-w-2xl mx-auto italic transition-colors duration-700 ${isLightTheme ? 'text-charcoal/80' : 'text-sand/40'}`}>
+              The transformation is not just in the clothes, <br /> it is in the creative identity of the student.
             </p>
           </motion.div>
+        </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 1.5, ease: LUXURY_EASE }}
-            className={`flex flex-col sm:flex-row items-center gap-8 md:gap-12 pt-8 border-t transition-colors duration-700 text-center sm:text-left ${isLightTheme ? 'border-charcoal/10' : 'border-sand/10'}`}
+        {/* Video Controls */}
+        <div className="absolute bottom-8 md:bottom-12 left-6 right-6 flex justify-between items-center z-20">
+          <button 
+            onClick={() => {
+              if (videoRef.current) {
+                if (isPlaying) videoRef.current.pause();
+                else videoRef.current.play();
+                setIsPlaying(!isPlaying);
+              }
+            }}
+            className={`group flex items-center gap-4 luxury-button transition-colors duration-700 ${isLightTheme ? 'text-charcoal' : 'text-sand'}`}
           >
-            <div className="space-y-1">
-              <p className="font-serif text-lg italic">Founded 2024</p>
-              <p className="luxury-button opacity-40 text-[8px]">A Perspective Shift</p>
+            <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full border flex items-center justify-center transition-all duration-500 ${isLightTheme ? 'border-charcoal/20 group-hover:bg-charcoal group-hover:text-paper' : 'border-sand/20 group-hover:bg-sand group-hover:text-charcoal'}`}>
+              {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-1" />}
             </div>
-            <div className={`hidden sm:block h-12 w-[1px] transition-colors duration-700 ${isLightTheme ? 'bg-charcoal/10' : 'bg-sand/10'}`} />
-            <div className="space-y-1">
-              <p className="font-serif text-lg italic">Industry-First</p>
-              <p className="luxury-button opacity-40 text-[8px]">Curriculum Excellence</p>
-            </div>
-          </motion.div>
+            <span className="text-[9px] md:text-[11px] tracking-widest">{isPlaying ? 'PAUSE' : 'PLAY'}</span>
+          </button>
         </div>
       </section>
 
